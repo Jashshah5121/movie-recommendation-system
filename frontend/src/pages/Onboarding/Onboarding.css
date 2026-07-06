@@ -1,0 +1,225 @@
+:root {
+  --bg: #0b0b0d; --bg-raised: #171719; --bg-raised-2: #202024;
+  --text: #f5f4f1; --text-muted: #b3b1ad;
+  --accent: #e5322d; --accent-hover: #ff4b3e;
+  --radius-md: 14px; --radius-lg: 22px; --radius-pill: 999px;
+  --shadow-md: 0 14px 34px rgba(0,0,0,.45);
+  --ease: cubic-bezier(.22,1,.36,1);
+  --font-display: "Bebas Neue","Arial Narrow",sans-serif;
+}
+
+.onboarding-page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.onboarding-card h1,
+.onboarding-card p,
+.onboarding-card .selection-count,
+.onboarding-card .step-text {
+  text-align: center;
+}
+
+.onboarding-card {
+  width: min(1500px, 96%);
+  margin: 40px auto;
+  background: var(--bg-raised);
+  border-radius: var(--radius-lg);
+  padding: 55px;
+}
+
+.onboarding-card.large-card {
+  width: min(900px, 96%);
+}
+
+.onboarding-page .logo {
+  font-size: 64px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.onboarding-card h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+}
+
+.onboarding-card .subtitle {
+  margin-top: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+.onboarding-card .step,
+.onboarding-card .step-text {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.onboarding-card .primary-btn,
+.onboarding-card .continue-btn {
+  margin-top: 36px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 17px 40px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.onboarding-card .primary-btn:hover,
+.onboarding-card .continue-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--accent-hover);
+  box-shadow: 0 10px 24px rgba(229, 50, 45, 0.3);
+}
+
+.onboarding-card .continue-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.onboarding-card .chip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 36px 0;
+}
+
+@media (max-width: 700px) {
+  .onboarding-card .chip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.onboarding-card .genre-chip {
+  background: var(--bg-raised-2);
+  border: none;
+  color: var(--text);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  transition: all 0.25s var(--ease);
+}
+
+.onboarding-card .genre-chip > * {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.onboarding-card .genre-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.onboarding-card .genre-chip:hover {
+  background: #2c2c31;
+  transform: translateY(-2px);
+}
+
+.onboarding-card .genre-chip.active {
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 0 0 3px rgba(229, 50, 45, 0.25);
+}
+
+.onboarding-card .selection-count {
+  margin: 18px 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.onboarding-card .movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.onboarding-card .movie-card {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  border: 3px solid transparent;
+}
+
+.onboarding-card .movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.onboarding-card .movie-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.onboarding-card .movie-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+}
+
+.onboarding-card .movie-title {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  z-index: 5;
+}
+
+.onboarding-card .movie-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(229, 50, 45, 0.25);
+}
+
+.onboarding-card .selected-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 10;
+}

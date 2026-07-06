@@ -1,0 +1,21 @@
+:root {
+  --bg: #0b0b0d; --text: #f5f4f1; --accent: #e5322d;
+  --font-display: "Bebas Neue","Arial Narrow",sans-serif;
+}
+
+.discover-page {
+  padding: 110px 40px 60px;
+  color: var(--text);
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.discover-page h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 2.6rem;
+  margin: 0 0 22px;
+  border-left: 4px solid var(--accent);
+  padding-left: 16px;
+}

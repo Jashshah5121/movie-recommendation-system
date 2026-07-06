@@ -1,0 +1,51 @@
+:root {
+  --bg: #0b0b0d; --text: #f5f4f1; --text-faint: #77767b;
+  --font-display: "Bebas Neue","Arial Narrow",sans-serif;
+}
+
+.wishlist-page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  padding: 110px 60px 60px;
+}
+
+.wishlist-header {
+  margin-bottom: 36px;
+}
+
+.wishlist-header h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 2.8rem;
+  margin: 0 0 8px;
+}
+
+.wishlist-header p {
+  color: var(--text-faint);
+  font-size: 17px;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 28px;
+}
+
+.wishlist-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 55vh;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+.wishlist-empty h2 {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 400;
+  margin-bottom: 12px;
+}

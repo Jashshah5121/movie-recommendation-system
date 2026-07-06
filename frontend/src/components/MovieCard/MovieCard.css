@@ -1,0 +1,188 @@
+:root {
+  --bg-raised: #171719; --border: rgba(255,255,255,0.08);
+  --text: #f5f4f1; --text-muted: #b3b1ad; --text-faint: #77767b;
+  --accent: #e5322d; --accent-hover: #ff4b3e; --gold: #ffc857;
+  --radius-sm: 8px; --radius-md: 14px; --radius-pill: 999px;
+  --shadow-md: 0 14px 34px rgba(0,0,0,.45);
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+.movie-card-link {
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+}
+
+.movie-card {
+  width: 190px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease);
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+}
+
+.poster-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s var(--ease);
+}
+
+.movie-card:hover .poster-container {
+  box-shadow: var(--shadow-md);
+}
+
+.movie-card .movie-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.3s var(--ease), transform 0.4s var(--ease);
+}
+
+.movie-card:hover .movie-poster {
+  filter: brightness(1.05);
+  transform: scale(1.03);
+}
+
+.movie-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.85));
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+}
+
+.movie-card:hover .movie-overlay {
+  opacity: 1;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  color: var(--gold);
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.movie-card .movie-info {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+.movie-card .movie-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-card .movie-info p {
+  color: var(--text-faint);
+  margin-top: 4px;
+  font-size: 0.85rem;
+}
+
+.poster-container .wishlist-btn,
+.poster-container button[class*="wishlist"] {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: rgba(11, 11, 13, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
+  z-index: 5;
+}
+
+.poster-container .wishlist-btn:hover,
+.poster-container button[class*="wishlist"]:hover {
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.poster-container .wishlist-btn svg,
+.poster-container button[class*="wishlist"] svg {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+  stroke: #fff;
+  fill: none;
+  transition: fill 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.poster-container .wishlist-btn.active,
+.poster-container .wishlist-btn[data-active="true"],
+.poster-container button[class*="wishlist"].active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.poster-container .wishlist-btn.active svg,
+.poster-container .wishlist-btn[data-active="true"] svg,
+.poster-container button[class*="wishlist"].active svg {
+  fill: #fff;
+  color: #fff;
+}
+
+.match-score {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.why-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.reason-chip {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  transition: all 0.2s var(--ease);
+}
+
+.reason-chip:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}

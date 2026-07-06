@@ -1,0 +1,38 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    environment:
+      - PYTHONPATH=/app/ml   # <--- ADD THIS LINE
+    env_file:
+      - backend/.env
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    # Important for Vite to enable hot-reloading inside Docker
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000 # Adjust based on how your frontend calls the API
+
+# Define the custom network as required by the specifications
+networks:
+  app-network:
+    driver: bridge

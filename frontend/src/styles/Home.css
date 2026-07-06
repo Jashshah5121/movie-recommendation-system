@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #0b0b0d;
+  --bg-raised: #171719;
+  --bg-raised-2: #202024;
+  --bg-input: #1c1c1f;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #f5f4f1;
+  --text-muted: #b3b1ad;
+  --text-faint: #77767b;
+  --accent: #e5322d;
+  --accent-hover: #ff4b3e;
+  --accent-soft: rgba(229, 50, 45, 0.14);
+  --gold: #ffc857;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin: 30px;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  color: var(--text);
+  font-size: 2.1rem;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin-top: 60px;
+  margin-bottom: 22px;
+  padding-left: 20px;
+  border-left: 4px solid var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,36 @@
+:root {
+  --bg-input: #1c1c1f; --border-strong: rgba(255,255,255,0.16);
+  --text: #f5f4f1; --accent: #e5322d;
+  --radius-md: 14px;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 26px 0;
+}
+
+.filter-bar select {
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 160px;
+  transition: border-color 0.2s var(--ease);
+}
+
+.filter-bar select:hover {
+  border-color: var(--accent);
+}
+
+.filter-bar select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(229, 50, 45, 0.2);
+}
