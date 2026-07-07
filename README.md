@@ -97,7 +97,11 @@ Make sure Docker Desktop is open and wait until it shows "Engine running". You c
 docker --version
 docker compose version
 ```
-
+6. **Boot the Containers:**
+Run the following command to build the images, fetch the ML models, and start the network:
+```bash
+docker-compose up --build
+```
 6. **Explore the Application:**
 Once the terminal indicates both containers are running (and the backend has finished downloading the machine learning model), open your web browser to start exploring!
 
