@@ -13,32 +13,16 @@ I chose this project to solve the problem of traditional movie recommendation sy
 
 ## 🌟 What Makes This Project Special
 
-This project stands out because it doesn't just treat machine learning as a theoretical exercise; it addresses real-world production and deployment constraints.
-MovieHub AI is more than a movie browsing website; it is a hybrid AI-powered recommendation platform. It combines semantic search, content-based filtering, and live TMDB data to provide personalized recommendations. Users can search using natural language, receive explainable AI recommendations with match percentages, and enjoy features like live autocomplete, advanced filters, trailers, similar movies, and a wishlist. The application uses a clean React + FastAPI architecture and is fully Dockerized, making it easy to deploy with a single command. By integrating AI with live movie data, MovieHub AI offers a smarter, faster, and more personalized movie recommendation experience than conventional movie websites.
-* **Automated Cloud-Fetching Architecture:** The biggest challenge in deploying ML projects via version control is file size limits (GitHub enforces a 100MB cap), but my pre-computed cosine similarity matrix (`similarity.pkl`) is ~400MB. Instead of compromising the model's complexity to make it fit, I engineered a dynamic boot-time solution. When the Docker container starts, it intelligently checks for the model. If missing, a script automatically downloads it from a hosted cloud environment before the FastAPI server boots.
-* **Hybrid AI Approach:** It doesn't rely solely on basic keyword matching. By using Sentence Transformers and cosine similarity, it understands the *semantic context* of natural language queries (e.g., "movies where toys come alive"), and then enriches those results with live, real-time data from TMDB APIs. 
-* **Explainable AI:** Instead of just outputting a list of movies, the backend calculates exactly *why* a movie is a match (e.g., "Same Genre, Strong Female Lead") and pushes those tags to the UI, building user trust.
+This project stands out because it doesn't just treat machine learning as a theoretical exercise; it addresses real-world production and deployment constraints. 
+
+MovieHub AI is more than a movie browsing website; it is a hybrid AI-powered recommendation platform. It combines semantic search, content-based filtering, and live TMDB data to provide highly personalized recommendations. Users can search using natural language, receive explainable AI recommendations with match percentages, and enjoy features like live autocomplete, advanced filters, trailers, similar movies, and a persistent wishlist. By integrating custom AI with live movie data, MovieHub AI offers a smarter, faster, and more intuitive movie discovery experience than conventional websites.
+
+* **Automated Cloud-Fetching Architecture:** The biggest challenge in deploying ML projects via version control is file size limits (GitHub enforces a 100MB cap), but the pre-computed cosine similarity matrix (`similarity.pkl`) is ~400MB. Instead of compromising the model's complexity to make it fit, I engineered a dynamic boot-time solution. When the Docker container starts, it intelligently checks for the model. If missing, a script automatically downloads it from a hosted cloud environment before the FastAPI server boots.
+* **Hybrid AI Approach:** It doesn't rely solely on basic keyword matching. By using `SentenceTransformers` and cosine similarity, it understands the *semantic context* of natural language queries (e.g., "movies where toys come alive"), and then enriches those results with live, real-time data from TMDB APIs. 
+* **Explainable AI:** Instead of just outputting a list of movies, the backend calculates exactly *why* a movie is a match (e.g., "Same Genre", "Strong Female Lead") and pushes those tags to the UI, building user trust and transparency.
 * **Strict "Plug and Play" DevOps:** The entire application—frontend, backend, and database—is perfectly containerized. A single `docker-compose up` command handles the networking, model fetching, and server initialization seamlessly.
-
- **Dynamic Recommendation Updates**
-Unlike many recommendation systems that generate recommendations only once, MovieHub AI continuously updates recommendations based on user interactions.
-The primary interaction considered is the Wishlist.
-Every time the user adds a movie to the Wishlist, the recommendation engine receives additional information about the user's interests.
-For example,
-User initially selects
-- Interstellar
-- Inception
-
-Later adds
-
-- Blade Runner 2049
-
-The recommendation engine now understands that the user prefers
-- Science Fiction
-- Space Exploration
-- Artificial Intelligence
-- Futuristic Themes
-As a result, future recommendations become more accurate.
+* **Dynamic Recommendation Updates:** Unlike static systems that generate recommendations only once, MovieHub AI continuously refines its suggestions based on user interactions—specifically through the Wishlist. Every time a movie is added, the engine receives new data about the user's evolving interests. 
+  > **Example:** If a user initially wishlists *Interstellar* and *Inception*, and later adds *Blade Runner 2049*, the recommendation engine dynamically shifts its centroid vector to prioritize themes like *Science Fiction, Space Exploration, and Artificial Intelligence*, resulting in progressively more accurate future recommendations.
 ---
 
 ## ✨ Key Features
