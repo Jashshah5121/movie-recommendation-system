@@ -88,96 +88,30 @@ Instead of compromising on model complexity, the Dockerized backend features a b
 
 This ensures the repository remains lightweight while supporting heavy-duty ML inference in a fully containerized, plug-and-play environment.
 
-## 4. Data Source 
-# Data Collection and Preprocessing
+## 4. Data Architecture & Preprocessing
 
-The performance of any recommendation system depends on the quality of its data. Therefore, before developing the recommendation engine, a comprehensive movie dataset was collected and preprocessed.
+The performance of any AI recommendation system fundamentally depends on the quality of its underlying data. MovieHub AI utilizes a **hybrid data strategy**, combining static pre-processed datasets with real-time API integrations.
 
-MovieHub AI uses **two different sources of data**:
+### A. Data Collection Strategy
+Instead of relying on manual entry, the system's foundational data is sourced from **The Movie Database (TMDB)**.
+* **Static Metadata Collection:** During development, core attributes (Titles, Genres, Overviews, Cast, Crew, Languages, Release Dates) were collected, cleaned, and structured to train the recommendation engine.
+* **Dynamic Data Fetching:** For volatile data (Trending Movies, Trailers, Live Ratings, and TMDB's native similar-movie recommendations), the FastAPI backend queries TMDB REST APIs in real-time. This guarantees the UI always reflects the current cinematic landscape without requiring constant local database updates.
 
-1. Local Movie Dataset (for AI recommendations)
-2. Live TMDB APIs (for real-time movie information)
+### B. Data Preprocessing Pipeline
+Raw datasets contain noise and irrelevant columns. A rigorous preprocessing pipeline was executed before generating the AI models:
+* **Data Cleaning:** Removed duplicate records, handled missing values (NaNs), and standardized text formatting.
+* **Feature Engineering:** Extracted high-value features and dropped redundant data.
+* **Metadata Consolidation:** The most critical step for the NLP engine. Attributes like *Overview, Genres, Keywords, Top Cast, and Director* were merged into a single, comprehensive text string for each movie. This dense textual representation provides the `SentenceTransformers` with the context needed to calculate highly accurate semantic similarities.
 
----
+### C. Artifact Generation & Storage
+While development utilized raw, heavy CSV files, production deployment is highly optimized to save space and compute time. Post-processing, the application requires only three core artifacts:
+1. `similarity.pkl`: The serialized matrix of cosine similarity scores (fetched dynamically via cloud at boot).
+2. `metadata.csv`: A lightweight reference file containing essential mapping data.
+3. `movies.db`: The structured relational database.
 
-# Data Crawling and Collection
+### D. SQLite Database (The Discover Engine)
+The cleaned, structured subset of the movie dataset is loaded into a local SQLite database (`movies.db`).
+* **Schema Highlights:** Stores optimized, indexed columns like `Movie ID`, `Title`, `Genres`, `Language`, `Ratings`, and `Release Date`.
+* **Purpose:** It acts as the backbone for the Discover page's advanced multi-parameter filtering.
+* **System Advantages:** By querying SQLite locally rather than hitting TMDB for complex filters, the system achieves near-zero network latency, bypasses third-party API rate limits, and delivers instantaneous, paginated results to the React frontend.
 
-Instead of manually entering movie information, the project uses data collected from **The Movie Database (TMDB)**.
-
-TMDB provides a rich collection of movie metadata through both downloadable datasets and REST APIs.
-
-During development, movie information was collected from TMDB, including:
-
-- Titles
-- Genres
-- Movie descriptions
-- Cast
-- Crew
-- Posters
-- Ratings
-- Languages
-- Release dates
-
-The downloaded datasets were cleaned and converted into a structured format suitable for building the recommendation engine.
-
-For movie information that changes frequently, such as trending movies, trailers, ratings, and recommendations, the application fetches the latest data directly from the TMDB API whenever a user interacts with the system.
-
-This hybrid approach ensures that the recommendation engine has a stable local dataset while still displaying the latest movie information.
-
----
-
-# Data Preprocessing
-
-The raw datasets contained multiple columns that were not directly useful for recommendation.
-
-Therefore, several preprocessing steps were performed.
-
-These include:
-
-- Removing duplicate movies
-- Handling missing values
-- Cleaning text
-- Extracting important features
-- Standardizing metadata
-- Combining multiple columns
-
-The following movie attributes were merged into a single textual representation:
-
-- Overview
-- Genres
-- Keywords
-- Cast
-- Director
-
-This combined metadata better represents the content of each movie and improves semantic similarity calculations.
-
-
-## Dataset Files
-
-The project initially used multiple CSV files containing movie information.
-but after calculating vectors and similarity we only need to store .pkl files, metdata.csv and movies.db
-
-
-# SQLite Database
-
-After preprocessing, the cleaned movie dataset was stored inside a local SQLite database.
-
-The database is primarily used by the Discover module.
-
-SQLite stores information such as:
-
-- Movie ID
-- Title
-- Genres
-- Language
-- Ratings
-- Release Date
-
-Using SQLite instead of repeatedly calling TMDB APIs provides:
-
-- Faster filtering
-- Offline support
-- Lower API usage
-- Better performance
-
----
