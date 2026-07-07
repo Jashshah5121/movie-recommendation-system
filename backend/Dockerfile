@@ -19,4 +19,5 @@ COPY ml /app/ml
 COPY backend/download_model.py /app/download_model.py
 
 EXPOSE 8000
-CMD ["sh", "-c", "python download_model.py && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+# Tell uvicorn exactly where to find the .env file
+CMD ["sh", "-c", "python download_model.py && uvicorn app.main:app --host 0.0.0.0 --port 8000 --env-file /app/backend/.env"]
