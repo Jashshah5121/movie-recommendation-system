@@ -102,7 +102,7 @@ Run the following command to build the images, fetch the ML models, and start th
 ```bash
 docker-compose up --build
 ```
-6. **Explore the Application:**
+7. **Explore the Application:**
 Once the terminal indicates both containers are running (and the backend has finished downloading the machine learning model), open your web browser to start exploring!
 
 **Frontend Interface:** http://localhost:5173
