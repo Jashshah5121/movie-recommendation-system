@@ -87,3 +87,98 @@ Instead of compromising on model complexity, the Dockerized backend features a b
 4. Once downloaded and verified, the Uvicorn FastAPI server starts.
 
 This ensures the repository remains lightweight while supporting heavy-duty ML inference in a fully containerized, plug-and-play environment.
+
+## 4. Data Source 
+# Data Collection and Preprocessing
+
+The performance of any recommendation system depends on the quality of its data. Therefore, before developing the recommendation engine, a comprehensive movie dataset was collected and preprocessed.
+
+MovieHub AI uses **two different sources of data**:
+
+1. Local Movie Dataset (for AI recommendations)
+2. Live TMDB APIs (for real-time movie information)
+
+---
+
+# Data Crawling and Collection
+
+Instead of manually entering movie information, the project uses data collected from **The Movie Database (TMDB)**.
+
+TMDB provides a rich collection of movie metadata through both downloadable datasets and REST APIs.
+
+During development, movie information was collected from TMDB, including:
+
+- Titles
+- Genres
+- Movie descriptions
+- Cast
+- Crew
+- Posters
+- Ratings
+- Languages
+- Release dates
+
+The downloaded datasets were cleaned and converted into a structured format suitable for building the recommendation engine.
+
+For movie information that changes frequently, such as trending movies, trailers, ratings, and recommendations, the application fetches the latest data directly from the TMDB API whenever a user interacts with the system.
+
+This hybrid approach ensures that the recommendation engine has a stable local dataset while still displaying the latest movie information.
+
+---
+
+# Data Preprocessing
+
+The raw datasets contained multiple columns that were not directly useful for recommendation.
+
+Therefore, several preprocessing steps were performed.
+
+These include:
+
+- Removing duplicate movies
+- Handling missing values
+- Cleaning text
+- Extracting important features
+- Standardizing metadata
+- Combining multiple columns
+
+The following movie attributes were merged into a single textual representation:
+
+- Overview
+- Genres
+- Keywords
+- Cast
+- Director
+
+This combined metadata better represents the content of each movie and improves semantic similarity calculations.
+
+
+## Dataset Files
+
+The project initially used multiple CSV files containing movie information.
+but after calculating vectors and similarity we only need to store .pkl files, metdata.csv and movies.db
+
+
+# SQLite Database
+
+After preprocessing, the cleaned movie dataset was stored inside a local SQLite database.
+
+The database is primarily used by the Discover module.
+
+SQLite stores information such as:
+
+- Movie ID
+- Title
+- Genres
+- Language
+- Ratings
+- Release Date
+
+Using SQLite instead of repeatedly calling TMDB APIs provides:
+
+- Faster filtering
+- Offline support
+- Lower API usage
+- Better performance
+
+---
+
