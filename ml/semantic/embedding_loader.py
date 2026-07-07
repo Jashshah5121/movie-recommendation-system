@@ -7,9 +7,6 @@ from sentence_transformers import SentenceTransformer
 from recommender.utils import get_movies
 
 
-# -------------------------------------------------
-# Paths
-# -------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,10 +16,6 @@ INDEX_FILE = EMBEDDINGS_DIR / "semantic_index.pkl"
 
 EMBEDDINGS_FILE = EMBEDDINGS_DIR / "sentence_embeddings.npy"
 
-
-# -------------------------------------------------
-# Singleton Loader
-# -------------------------------------------------
 
 class EmbeddingLoader:
 

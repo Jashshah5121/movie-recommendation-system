@@ -9,9 +9,7 @@ class IntentDetector:
         original = query.strip()
         q = original.lower()
 
-        # ----------------------------
-        # Similar Movie
-        # ----------------------------
+        
 
         if re.search(
             r"(movies?|films?)\s+like|similar\s+to|recommend.*like",
@@ -22,9 +20,7 @@ class IntentDetector:
                 "query": original
             }
 
-        # ----------------------------
-        # Year
-        # ----------------------------
+        
 
         if re.search(r"\b(19|20)\d{2}\b", q):
             return {
@@ -32,9 +28,7 @@ class IntentDetector:
                 "query": original
             }
 
-        # ----------------------------
-        # Genres
-        # ----------------------------
+        
 
         genres = [
             "action",
@@ -65,9 +59,7 @@ class IntentDetector:
                     "query": original
                 }
 
-        # ----------------------------
-        # Languages
-        # ----------------------------
+        
 
         languages = [
             "english",
@@ -87,10 +79,7 @@ class IntentDetector:
                     "query": original
                 }
 
-        # ----------------------------
-        # Person Search
-        # ----------------------------
-
+       
         person_patterns = [
             r".+\s+movies?$",
             r".+\s+films?$",
@@ -107,9 +96,7 @@ class IntentDetector:
                     "query": original
                 }
 
-        # ----------------------------
-        # Natural Language
-        # ----------------------------
+       
 
         description_words = [
             "where",
@@ -137,10 +124,7 @@ class IntentDetector:
                 "query": original
             }
 
-        # ----------------------------
-        # Exact Movie
-        # ----------------------------
-
+        
         return {
             "intent": "EXACT_MOVIE",
             "query": original
