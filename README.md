@@ -19,6 +19,28 @@ MovieHub AI is more than a movie browsing website; it is a hybrid AI-powered rec
 * **Hybrid AI Approach:** It doesn't rely solely on basic keyword matching. By using Sentence Transformers and cosine similarity, it understands the *semantic context* of natural language queries (e.g., "movies where toys come alive"), and then enriches those results with live, real-time data from TMDB APIs. 
 * **Explainable AI:** Instead of just outputting a list of movies, the backend calculates exactly *why* a movie is a match (e.g., "Same Genre, Strong Female Lead") and pushes those tags to the UI, building user trust.
 * **Strict "Plug and Play" DevOps:** The entire application—frontend, backend, and database—is perfectly containerized. A single `docker-compose up` command handles the networking, model fetching, and server initialization seamlessly.
+
+ **Dynamic Recommendation Updates**
+Unlike many recommendation systems that generate recommendations only once, MovieHub AI continuously updates recommendations based on user interactions.
+The primary interaction considered is the Wishlist.
+Every time the user adds a movie to the Wishlist, the recommendation engine receives additional information about the user's interests.
+For example,
+User initially selects
+- Interstellar
+- Inception
+
+Later adds
+
+- Blade Runner 2049
+
+The recommendation engine now understands that the user prefers
+- Science Fiction
+- Space Exploration
+- Artificial Intelligence
+- Futuristic Themes
+As a result, future recommendations become more accurate.
+---
+
 ## ✨ Key Features
 * **🧠 AI Semantic Search:** Describe a movie naturally (e.g., "movie where toys come alive") and the backend's Sentence Transformers will find it using vector embeddings.
 * **💡 Explainable AI:** Recommendations come with match percentages and reasoning (e.g., *95% Match: Similar Theme, Space Adventure*), letting users know *why* a movie was suggested.
