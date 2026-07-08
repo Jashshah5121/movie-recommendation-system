@@ -42,3 +42,10 @@ Once the terminal indicates both containers are running (and the backend has fin
 **Frontend Interface:** http://localhost:5173
 
 **Backend API Documentation:** http://localhost:8000/docs`
+
+8. **Stopping the Application:**
+To shut down the application gracefully, press `Ctrl + C` in the terminal where Docker is running.
+To completely remove the containers and clear the network, run:
+```bash
+docker-compose down
+```
