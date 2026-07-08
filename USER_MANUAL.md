@@ -61,7 +61,7 @@ MovieHub allows you to save movies for later, and uses these saves to improve yo
 ## 6. Movie Details & Trailers
 Clicking on any movie poster will take you to its dedicated Details Page.
 
-![Movie Details Page](./Images/MovieDetails.png) 
+![Movie Details Page](./Images/movie_details.png) 
 
 * Here you can read the full plot overview, see the cast and director, and view user ratings.
 * **Trailers:** Click the "Watch Trailer" button to instantly open the official YouTube trailer in a new tab.
