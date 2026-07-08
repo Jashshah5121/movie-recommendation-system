@@ -115,3 +115,194 @@ The cleaned, structured subset of the movie dataset is loaded into a local SQLit
 * **Purpose:** It acts as the backbone for the Discover page's advanced multi-parameter filtering.
 * **System Advantages:** By querying SQLite locally rather than hitting TMDB for complex filters, the system achieves near-zero network latency, bypasses third-party API rate limits, and delivers instantaneous, paginated results to the React frontend.
 
+## 5. APIs Used
+ 
+### TMDB APIs
+ 
+| Purpose | Endpoint |
+|---|---|
+| Popular Movies | `/movie/popular` |
+| Trending | `/trending/movie/week` |
+| Upcoming | `/movie/upcoming` |
+| Top Rated | `/movie/top_rated` |
+| Movie Details | `/movie/{id}` |
+| Videos | `/movie/{id}/videos` |
+| Credits | `/movie/{id}/credits` |
+| Recommendations | `/movie/{id}/recommendations` |
+| Search | `/search/movie` |
+| Autocomplete | `/search/movie` (top results only) |
+ 
+### Internal Backend APIs
+ 
+```
+/movies
+/movie/{id}
+/discover
+/search
+/search/autocomplete
+/recommendations
+/movies/{id}/similar
+/ai-recommend
+```
+ 
+The frontend only ever talks to these internal endpoints — the backend owns all communication with TMDB and the local database.
+ 
+---
+
+## 6. Search Systems
+ 
+MovieHub AI has **three** distinct search systems:
+ 
+### 6.1 Normal Search
+ 
+```
+Search → Backend → TMDB Search → Results
+```
+ 
+Uses the TMDB Search API directly.
+ 
+### 6.2 Live Autocomplete
+ 
+```
+Typing → Backend → TMDB Search → Top 8 Matches → Dropdown Suggestions
+```
+ 
+Features:
+- Live typing with debouncing
+- Poster + movie year in suggestions
+- Keyboard navigation
+- Instant navigation on click
+- 
+### 6.3 AI Search (the project's strongest feature)
+ 
+Instead of typing an exact movie name, users can type things like:
+- *"Movie where toys come alive"*
+- *"Movies like Avatar"*
+- *"Tom Cruise action movie"*
+- *"Man living in jungle with animals"*
+The backend interprets the query intent and returns intelligent, semantically matched recommendations.
+ 
+### 🖼️ AI Recommend — Natural Language Search
+ 
+Example: querying **"man living in jungle with animals"** correctly resolves intent as `DESCRIPTION` and surfaces *The Jungle Book* with a 98% semantic match, tagged as matched via **Semantic Search**.
+  
+---
+ 
+## 7. AI Recommendation System (Core Engine)
+ 
+Unlike simple keyword search, MovieHub AI uses a **hybrid recommendation** approach.
+ 
+**Step 1** — User enters a query, e.g. `Interstellar` or `Movie like Inception`.
+ 
+**Step 2** — Backend classifies intent:
+- Movie name?
+- Actor?
+- Director?
+- Natural language description?
+**Step 3** — Movie metadata is gathered: title, genres, keywords, overview, tagline, cast, director, language, popularity, rating.
+ 
+**Step 4** — Sentence Transformers convert text into embeddings:
+ 
+```
+Interstellar → [0.23, 0.71, 0.55, ...]
+```
+ 
+**Step 5** — Cosine similarity is calculated between the user's query vector and all movie vectors.
+ 
+**Step 6** — Top similar vectors are selected.
+ 
+**Step 7** — Results are enriched with live TMDB data and returned to the frontend.
+ 
+### AI Models Used
+ 
+| Component | Purpose |
+|---|---|
+| **Sentence Transformers** | Semantic understanding — converts overview, genre, keywords, and cast into embeddings |
+| **Cosine Similarity** | Compares vectors; higher similarity → higher recommendation score |
+| **Hybrid Ranking** | Combines semantic score + TMDB popularity + ratings + release recency for final ordering |
+ 
+### Recommendation Pipeline
+ 
+```
+Movie Metadata + Overview + Genres + Actors + Keywords + Embeddings
+        ↓
+  Cosine Similarity
+        ↓
+     Ranking
+        ↓
+ Recommendation
+```
+ 
+---
+ 
+## 8. Explainable AI
+ 
+Every AI recommendation explains **why** it was suggested — not just a black-box score.
+ 
+Example for a 95% match:
+- Same genre
+- Similar theme
+- Strong female lead
+- Space adventure
+- Psychological thriller
+This transparency helps users trust and understand *why* a movie was recommended, rather than receiving an opaque ranked list.
+ 
+---
+ 
+## 9. Similar Movies Engine
+ 
+```
+Movie Details Page → Movie ID → TMDB Similar API → Recommended Movies
+```
+ 
+---
+ 
+## 8. Trailer System
+ 
+```
+Movie → Video API → YouTube Trailer
+```
+ 
+Trailers open in a **new browser tab** rather than an embedded iframe, keeping the main experience uninterrupted.
+ 
+---
+ 
+## 9. Wishlist System
+ 
+Built entirely on the frontend using **React Context API** — no backend required.
+ 
+Features:
+- Add / remove movies
+- Persistence across sessions
+- Heart animation
+- Live counter in the nav bar
+---
+## 15. Dockerization
+ 
+```
+Docker Compose
+      ↓
+Frontend Container + Backend Container
+      ↓
+  Networked Together
+```
+ 
+A single command — `docker compose up` — starts the complete application with the frontend and backend connected automatically.
+ 
+---
+ 
+## 16. Unique Features Summary
+ 
+- Hybrid recommendation engine combining semantic AI with live TMDB data
+- Natural language movie search — describe a movie instead of knowing its title
+- Explainable recommendations with match percentages and reasoning
+- Real-time autocomplete with posters and release years
+- Advanced Discover page with multiple filters
+- Dynamic hero banner with live movie information
+- One-click trailer playback in a new browser tab
+- Persistent wishlist with live UI updates
+- Similar movie recommendations from the details page
+- Modern, Netflix-inspired responsive interface
+- Fully Dockerized architecture for easy deployment
+- Clear separation between frontend (React) and backend (FastAPI) for scalability and maintainability
+---
