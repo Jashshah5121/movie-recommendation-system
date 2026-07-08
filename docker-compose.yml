@@ -11,9 +11,10 @@ services:
     networks:
       - app-network
     environment:
-      - PYTHONPATH=/app/ml   # <--- ADD THIS LINE
-    env_file:
-      - backend/.env
+      - PYTHONPATH=/app/ml
+      - TMDB_READ_ACCESS_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjY2RjNjRjNTAxYzZjMmQwMGQzOTIwMTdjZWMwMTZmYyIsIm5iZiI6MTc4Mjg1MzIxOC41MjksInN1YiI6IjZhNDQyZTYyMzlhOTc5MjE3MTVkMThjMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2WTDgiV3mO0yzs-liRq_loQtjxETImZq4CxUyrYLGjM
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/movies
+      - SECRET_KEY=7645743542907865623
 
   frontend:
     build:
