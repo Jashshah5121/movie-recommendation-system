@@ -69,7 +69,6 @@ This application is completely containerized. You do not need to install Python,
 ### Prerequisites
 * **Git** installed on your local machine.
 * **Docker Desktop** installed and running.
-* **Environment Variables:** Obtain the required `.env` file (provided via email) to connect to the necessary services.
 
 ### Steps
 
@@ -88,22 +87,19 @@ This application is completely containerized. You do not need to install Python,
   cd movie-recommendation-system
 ```
 
-4. **Add the Environment File:**
-Place the `.env` file you received via email directly into the backend directory. The exact file path must be: `backend/.env`
-
-5. **Verify Docker is running:**
+4. **Verify Docker is running:**
 Make sure Docker Desktop is open and wait until it shows "Engine running". You can verify it's available from your terminal by running:
 ```bash
 docker --version
 docker compose version
 ```
 6. **Boot the Containers:**
-Run the following command to build the images, fetch the ML models, and start the network:
+Run the following command to build the images, automatically fetch the ML models & environment configurations, and start the network:
 ```bash
 docker-compose up --build
 ```
 7. **Explore the Application:**
-Once the terminal indicates both containers are running (and the backend has finished downloading the machine learning model), open your web browser to start exploring!
+Once the terminal indicates both containers are running (and the backend has finished downloading the required ML models and `.env` file), open your web browser to start exploring!
 
 **Frontend Interface:** http://localhost:5173
 
