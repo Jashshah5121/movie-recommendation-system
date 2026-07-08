@@ -1,0 +1,8 @@
+# Default behavior: Let Git auto-detect text files and normalize them
+* text=auto
+
+# Force shell scripts to ALWAYS use Linux line endings (LF)
+*.sh text eol=lf
+
+# (Optional) Force Windows batch scripts to always use CRLF
+*.bat text eol=crlf
