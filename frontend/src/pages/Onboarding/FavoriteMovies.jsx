@@ -114,7 +114,7 @@ export default function FavoriteMovies() {
 
     return (
 
-        <div className="onboarding-card">
+        <div className="onboarding-card has-sticky-footer">
 
             <div className="step-text">
                 Step 3 of 4
@@ -177,16 +177,29 @@ export default function FavoriteMovies() {
 
             </div>
 
-            <button
-                className="continue-btn"
-                disabled={selected.length < 3}
-                onClick={continueNext}
-            >
-                Finish →
-            </button>
+            <div className="sticky-footer">
+
+                <div className="sticky-footer-inner">
+
+                    <span className="sticky-footer-count">
+                        Selected {selected.length} / 3 Minimum
+                    </span>
+
+                    <button
+                        className="continue-btn"
+                        disabled={selected.length < 3}
+                        onClick={continueNext}
+                    >
+                        Finish →
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
     );
 
 }
+

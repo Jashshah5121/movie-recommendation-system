@@ -17,9 +17,7 @@ def extract_movie_data(
     videos
 ):
 
-    # -------------------------
-    # Director
-    # -------------------------
+
 
     director = ""
 
@@ -29,54 +27,38 @@ def extract_movie_data(
             director = crew.get("name", "")
             break
 
-    # -------------------------
-    # Top 3 Cast
-    # -------------------------
+
 
     movie_cast = []
 
     for actor in credits.get("cast", [])[:3]:
         movie_cast.append(actor.get("name", ""))
 
-    # -------------------------
-    # Keywords
-    # -------------------------
 
     keyword_list = []
 
     for keyword in keywords.get("keywords", []):
         keyword_list.append(keyword.get("name", ""))
 
-    # -------------------------
-    # Genres
-    # -------------------------
-
     genres = []
 
     for genre in details.get("genres", []):
         genres.append(genre.get("name", ""))
 
-    # -------------------------
-    # Companies
-    # -------------------------
 
     companies = []
 
     for company in details.get("production_companies", []):
         companies.append(company.get("name", ""))
 
-    # -------------------------
-    # Countries
-    # -------------------------
+
 
     countries = []
 
     for country in details.get("production_countries", []):
         countries.append(country.get("name", ""))
 
-    # -------------------------
-    # Trailer
-    # -------------------------
+
 
     trailer = ""
 
@@ -90,18 +72,14 @@ def extract_movie_data(
             trailer = video.get("key", "")
             break
 
-    # -------------------------
-    # Collection
-    # -------------------------
+
 
     collection = ""
 
     if details.get("belongs_to_collection"):
         collection = details["belongs_to_collection"].get("name", "")
 
-    # -------------------------
-    # Return
-    # -------------------------
+
 
     return {
 

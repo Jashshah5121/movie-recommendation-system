@@ -17,18 +17,14 @@ class RecommendationExplainer:
 
         why = []
 
-        # ----------------------------------------------------
-        # Metadata reasons
-        # ----------------------------------------------------
+
 
         if movie.get("why"):
             for item in movie["why"]:
                 if item not in why:
                     why.append(item)
 
-        # ----------------------------------------------------
-        # Search engines used
-        # ----------------------------------------------------
+
 
         source_map = {
             "semantic": "Semantic Search",
@@ -46,9 +42,6 @@ class RecommendationExplainer:
                 if readable not in why:
                     why.append(readable)
 
-        # ----------------------------------------------------
-        # Intent specific explanation
-        # ----------------------------------------------------
 
         intent = intent.upper()
 
@@ -88,9 +81,6 @@ class RecommendationExplainer:
                 "Matched your natural language description."
             )
 
-        # ----------------------------------------------------
-        # Confidence
-        # ----------------------------------------------------
 
         if confidence is None:
 
@@ -104,9 +94,6 @@ class RecommendationExplainer:
 
         confidence = max(0, min(confidence, 100))
 
-        # ----------------------------------------------------
-        # Confidence level
-        # ----------------------------------------------------
 
         if confidence >= 90:
             level = "Excellent"
@@ -123,9 +110,6 @@ class RecommendationExplainer:
         else:
             level = "Low"
 
-        # ----------------------------------------------------
-        # Nice defaults
-        # ----------------------------------------------------
 
         if not why:
             why = ["AI Recommendation"]
@@ -143,9 +127,6 @@ class RecommendationExplainer:
         }
 
 
-# ============================================================
-# Backward Compatibility
-# ============================================================
 
 def generate_explanation(movie, query="", intent="DESCRIPTION"):
     """

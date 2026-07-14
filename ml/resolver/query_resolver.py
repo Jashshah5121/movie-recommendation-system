@@ -13,9 +13,7 @@ class QueryResolver:
         intent = detected["intent"]
         text = detected["query"]
 
-        # -------------------------
-        # Similar Movie
-        # -------------------------
+
 
         if intent == "SIMILAR_MOVIE":
 
@@ -34,9 +32,6 @@ class QueryResolver:
 
             }
 
-        # -------------------------
-        # Person
-        # -------------------------
 
         if intent == "PERSON":
 
@@ -55,9 +50,7 @@ class QueryResolver:
 
             }
 
-        # -------------------------
-        # Others
-        # -------------------------
+
 
         return {
 

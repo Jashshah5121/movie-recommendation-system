@@ -207,6 +207,58 @@
   box-shadow: 0 0 0 4px rgba(229, 50, 45, 0.25);
 }
 
+.onboarding-card.has-sticky-footer {
+  padding-bottom: 130px;
+}
+ 
+.sticky-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 22px 20px 26px;
+  background: linear-gradient(to top, rgba(11, 11, 13, 0.98) 55%, rgba(11, 11, 13, 0));
+  pointer-events: none;
+}
+ 
+.sticky-footer-inner {
+  width: min(1500px, 96%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--bg-raised-2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 14px 26px;
+  box-shadow: var(--shadow-md);
+  pointer-events: auto;
+}
+ 
+.sticky-footer-count {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+}
+ 
+.sticky-footer .continue-btn {
+  margin-top: 0;
+  white-space: nowrap;
+}
+ 
+@media (max-width: 600px) {
+  .sticky-footer-inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 12px;
+  }
+}
+ 
 .onboarding-card .selected-badge {
   position: absolute;
   top: 12px;

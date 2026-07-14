@@ -16,9 +16,6 @@ class TMDBClient:
             "accept": "application/json"
         })
 
-    # -----------------------------------------
-    # Internal Request Method
-    # -----------------------------------------
 
     def _get(self, endpoint, params=None):
 
@@ -58,9 +55,6 @@ class TMDBClient:
 
         return None
 
-    # -----------------------------------------
-    # Discover Movies
-    # -----------------------------------------
 
     def discover_movies(
         self,
@@ -86,9 +80,6 @@ class TMDBClient:
 
         )
 
-    # -----------------------------------------
-    # Movie Details
-    # -----------------------------------------
 
     def get_movie_details(
         self,
@@ -101,9 +92,6 @@ class TMDBClient:
 
         )
 
-    # -----------------------------------------
-    # Credits
-    # -----------------------------------------
 
     def get_movie_credits(
         self,
@@ -116,9 +104,7 @@ class TMDBClient:
 
         )
 
-    # -----------------------------------------
-    # Keywords
-    # -----------------------------------------
+
 
     def get_movie_keywords(
         self,

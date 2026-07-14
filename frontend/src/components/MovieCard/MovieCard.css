@@ -15,6 +15,7 @@
 
 .movie-card {
   width: 190px;
+  flex-shrink: 0;
   cursor: pointer;
   display: flex;
   flex-direction: column;

@@ -18,9 +18,7 @@ def hybrid_recommend(query, top_k=10):
 
     result = search(query, top_k)
 
-    # ------------------------
-    # Movie Recommendation Mode
-    # ------------------------
+
     if result["type"] == "movie":
 
         recommendations = result["recommendations"]
@@ -42,9 +40,6 @@ def hybrid_recommend(query, top_k=10):
             "results": recommendations
         }
 
-    # ------------------------
-    # Hybrid Search Mode
-    # ------------------------
     recommendations = result["results"]
 
     for movie in recommendations:

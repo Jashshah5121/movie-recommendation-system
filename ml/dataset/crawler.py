@@ -14,18 +14,12 @@ print("Token found:", TOKEN is not None)
 
 client = TMDBClient(TOKEN)
 
-# -----------------------------------
-# Configuration
-# -----------------------------------
 
 START_YEAR = 1989
 END_YEAR = 2026
 PAGES_PER_YEAR = 10
 
 
-# -----------------------------------
-# Crawl one year
-# -----------------------------------
 
 def save_movies(year, pages):
 
@@ -103,9 +97,6 @@ def save_movies(year, pages):
     print(f"\nFinished Year {year}")
 
 
-# -----------------------------------
-# Main
-# -----------------------------------
 
 if __name__ == "__main__":
 

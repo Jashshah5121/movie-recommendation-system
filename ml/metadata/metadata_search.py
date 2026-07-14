@@ -25,9 +25,6 @@ class MetadataSearch:
             score = 0
             why = []
 
-            # -----------------------------
-            # Dataset Fields
-            # -----------------------------
 
             director = MetadataSearch._clean(
                 movie.get("director")
