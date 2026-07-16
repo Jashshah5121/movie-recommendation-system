@@ -59,18 +59,7 @@ Look closely at the port number mentioned at the very end of the terminal error 
 * If the error mentions **`5173`**, your **frontend** service is blocked.
 * If the error mentions **`8000`**, your **backend** service is blocked.
 
-**Solution A: Change the Port Mapping (Universal Fix)**
-
-You can easily route the application to any open port on your machine by editing the `docker-compose.yml` file. 
-1. Open `docker-compose.yml`.
-2. Locate the `ports` section under the failing service (e.g., `frontend` or `backend`).
-3. Change the **first** number (your host port) to any available port of your choice (e.g., `4000`, `8080`, or `3000`).
-   ```yaml
-   ports:
-     - "4000:5173" # Routes your localhost:4000 to the container's 5173
-4. Run docker-compose up --build again and access the app at your newly chosen port (e.g., http://localhost:4000).
-
-**Solution B: Free up the blocked ports (Windows Only)**
+**Solution A: Free up the blocked ports (Windows Only | Quick Fix)**
 
 Windows occasionally blocks large ranges of ports automatically. You can restart the Host Network Service to clear this blockage.
 1. Open a new terminal as an Administrator.
@@ -80,3 +69,14 @@ Windows occasionally blocks large ranges of ports automatically. You can restart
    net start winnat
    ```
 3. Return to your project terminal and run `docker-compose up --build`.
+
+**Solution B: Change the Port Mapping (Universal Fix)**
+
+You can easily route the application to any open port on your machine by editing the `docker-compose.yml` file. 
+1. Open `docker-compose.yml`.
+2. Locate the `ports` section under the failing service (e.g., `frontend` or `backend`).
+3. Change the **first** number (your host port) to any available port of your choice (e.g., `4000`, `8080`, or `3000`).
+   ```yaml
+   ports:
+     - "4000:5173" # Routes your localhost:4000 to the container's 5173
+4. Run docker-compose up --build again and access the app at your newly chosen port (e.g., http://localhost:4000).
