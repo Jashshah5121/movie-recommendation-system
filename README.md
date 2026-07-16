@@ -60,6 +60,14 @@ MovieHub AI is more than a movie browsing website; it is a hybrid AI-powered rec
 
 ---
 
+## 🧪 Cross-Platform Testing
+
+This project has been tested end-to-end on **both Windows and macOS**, and it runs successfully on each without requiring any code changes — this is exactly what Docker Compose is for, since the entire stack (frontend, backend, and ML models) runs inside containers rather than depending on anything installed on the host OS.
+
+The one environment-specific quirk observed (Windows only) is an occasional **port conflict**, where Docker fails to bind to `5173`, `3000`, or `8000` if those ports are already in use or reserved by Windows' Hyper-V networking. This isn't a bug in the application itself — it's a local machine/OS issue — and a full step-by-step fix is documented in [INSTALLATION_GUIDE.md](https://github.com/Jashshah5121/movie-recommendation-system/blob/main/INSTALLATION_GUIDE.md), under "Troubleshooting Common Issues."
+
+---
+
   ## Future Scope
  
 - User authentication and personalized recommendation history
